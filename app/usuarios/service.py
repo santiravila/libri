@@ -28,13 +28,8 @@ class UsuarioServicio:
             raise
 
     def leer_usuario(self, user_id: int):
-        try:
-            usuario_db = self.repo.cargar_usuario(user_id=user_id)
-            self.session.commit()
-            return usuario_db
-        except Exception:
-            self.session.rollback()
-            raise
+        usuario_db = self.repo.cargar_usuario(user_id=user_id)
+        return usuario_db
 
     def eliminar_usuario(self, user_id: int):
         try:

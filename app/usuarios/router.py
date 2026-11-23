@@ -29,7 +29,7 @@ def crear_usuario(
     return UsuarioRespuesta.model_validate(usuario)
 
 
-@router.get("{user_id}", response_model=UsuarioRespuesta)
+@router.get("/{user_id}", response_model=UsuarioRespuesta)
 def leer_usuario(
     user_id: int,
     servicio: ServiceDep
@@ -38,7 +38,7 @@ def leer_usuario(
     return UsuarioRespuesta.model_validate(usuario)
 
 
-@router.delete("{user_id}", response_model=UsuarioRespuesta)
+@router.delete("/{user_id}", response_model=UsuarioRespuesta)
 def eliminar_usuario(
     user_id: int,
     servicio: ServiceDep
@@ -47,7 +47,7 @@ def eliminar_usuario(
     return UsuarioRespuesta.model_validate(usuario_eliminado)
 
 
-@router.patch("{user_id}", response_model=UsuarioRespuesta)
+@router.patch("/{user_id}", response_model=UsuarioRespuesta)
 def actualizar_usuario(
     user_id: int,
     payload: UsuarioActualizar,
