@@ -1,12 +1,18 @@
 from .models import Usuario
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 class UsuarioRepositorio:
     def __init__(
         self,
-        session: Session    
+        session: Session
             ) -> None:
         self.session = session
+
+    def cargar_por_email(self, email: str) -> Usuario | None:
+        return self.session.scalar(
+            select(Usuario).where(Usuario.email == email)
+        )
 
     def guardar_usuario(self, usuario: Usuario) -> Usuario:
         self.session.add(usuario)

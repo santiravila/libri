@@ -1,24 +1,32 @@
 from datetime import datetime
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, EmailStr
+from .models import Rol
 
 
 class UsuarioBase(BaseModel):
     nombre: str
-    password: str #temporal
+    email: EmailStr
 
 
 class UsuarioCrear(UsuarioBase):
-    pass
+    password: str  # viaja en texto plano (lo protege HTTPS); se guarda hasheado con argon2
 
 
-class UsuarioRespuesta(BaseModel):
-    nombre: str
-    password: str
+class UsuarioRespuesta(UsuarioBase):
     model_config = ConfigDict(from_attributes=True)
     id: int
-    fecha_registro: datetime
+    rol: Rol
+    activo: bool
+    creado_en: datetime
+    # NB: ni password ni password_hash se exponen nunca
 
 
-class UsuarioActualizar(UsuarioBase):
+class UsuarioActualizar(BaseModel):
     nombre: str | None = None
+    email: EmailStr | None = None
     password: str | None = None
+
+
+class UsuarioLogin(BaseModel):
+    email: EmailStr
+    password: str
