@@ -26,7 +26,8 @@ def crear_usuario(
 @router.get("/{user_id}", response_model=UsuarioRespuesta)
 def leer_usuario(
     user_id: int,
-    servicio: ServiceDep
+    servicio: ServiceDep,
+    actual: UsuarioActual
 ) -> UsuarioRespuesta:
     usuario = servicio.leer_usuario(user_id)
     return UsuarioRespuesta.model_validate(usuario)

@@ -36,7 +36,6 @@ def usuario_actual(
     except ValueError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
     
-    
     return usuario
 
 UsuarioActual = Annotated[Usuario, Depends(usuario_actual)]
